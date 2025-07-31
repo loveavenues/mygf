@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Delivery for Girlfriend's Day! 💕</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        'xs': '475px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        .dancing-script { font-family: 'Dancing Script', cursive; }
+        .poppins { font-family: 'Poppins', sans-serif; }
+        
+        .airplane {
+            animation: flyAcross 4s ease-in-out forwards;
+            transform: translateX(-200px);
+        }
+        
+        @keyframes flyAcross {
+            0% { transform: translateX(-200px) translateY(0px); }
+            50% { transform: translateX(50vw) translateY(-20px); }
+            70% { transform: translateX(60vw) translateY(-10px); }
+            100% { transform: translateX(120vw) translateY(0px); }
+        }
+        
+        @media (max-width: 768px) {
+            .airplane {
+                font-size: 3rem;
+            }
+        }
+        
+        .letter-drop {
+            animation: letterDrop 3s ease-in forwards;
+            animation-delay: 2.5s;
+            opacity: 0;
+            transform: translateY(-100px);
+            left: 50% !important;
+            transform-origin: center;
+        }
+        
+        @keyframes letterDrop {
+            0% { 
+                opacity: 1; 
+                transform: translateX(-50%) translateY(-100px) rotate(0deg) scale(0.5); 
+            }
+            50% { 
+                transform: translateX(-50%) translateY(20vh) rotate(10deg) scale(0.8); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(-50%) translateY(40vh) rotate(0deg) scale(1); 
+            }
+        }
+        
+        .letter-glow {
+            animation: letterGlow 2s ease-in-out infinite;
+            animation-delay: 5.5s;
+        }
+        
+        @keyframes letterGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); }
+            50% { box-shadow: 0 0 50px rgba(0, 0, 0, 0.3); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .letter-open {
+            animation: letterOpen 0.8s ease-out forwards;
+        }
+        
+        @keyframes letterOpen {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(180deg); }
+        }
+        
+        .content-reveal {
+            animation: contentReveal 1s ease-out forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        @keyframes contentReveal {
+            to { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+        }
+        
+        .heart-float {
+            animation: heartFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes heartFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+
+        
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        @media (max-width: 640px) {
+            .envelope {
+                width: 250px;
+                height: 167px;
+            }
+        }
+        
+        @media (max-width: 475px) {
+            .envelope {
+                width: 200px;
+                height: 133px;
+            }
+        }
+        
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+        
+        .envelope-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 3px solid #cbd5e1;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            height: 120px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border: 3px solid #d97706;
+            border-radius: 8px 8px 0 0;
+            transform-origin: bottom center;
+            transition: transform 0.8s ease;
+            z-index: 2;
+        }
+        
+        .envelope-flap::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 40px solid #f59e0b;
+        }
+        
+        .envelope.opened .envelope-flap {
+            transform: rotateX(-180deg);
+        }
+        
+        .message-content {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: white;
+            border-radius: 6px;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .envelope.opened .message-content {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.4s;
+        }
+        
+        .message-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #374151;
+            text-align: center;
+        }
+        
+        .envelope-shine {
+            animation: envelopeShine 2s ease-in-out infinite;
+        }
+        
+        @keyframes envelopeShine {
+            0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.6); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-100 via-white to-gray-200 poppins overflow-x-hidden">
+    
+    <!-- Airplane Animation -->
+    <div id="airplane" class="airplane fixed top-32 left-0 z-20 text-4xl sm:text-5xl md:text-6xl">
+        ✈️
+    </div>
+    
+    <!-- Letter Drop Animation -->
+    <div id="letterDrop" class="letter-drop fixed top-32 z-10 text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
+        💌
+    </div>
+    
+    <!-- Main Scene -->
+    <div class="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div class="text-center max-w-4xl mx-auto w-full">
+            
+            <!-- Initial Welcome -->
+            <div id="welcomeScreen" class="fade-in px-4">
+                <h1 class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold dancing-script text-black mb-6 sm:mb-8 leading-tight">
+                    Happy Girlfriend's Day! 💕
+                </h1>
+                <p class="text-lg xs:text-xl md:text-2xl text-gray-700 mb-8 sm:mb-12 max-w-2xl mx-auto px-2">
+                    A special delivery is coming your way... ✈️
+                </p>
+            </div>
+            
+            <!-- Letter Interaction -->
+            <div id="letterInteraction" class="hidden px-4">
+                <div class="letter-glow bg-white rounded-3xl p-6 sm:p-8 shadow-2xl max-w-md mx-auto mb-8 border border-gray-200">
+                    <div class="text-5xl sm:text-6xl mb-4">💌</div>
+                    <h2 class="text-2xl sm:text-3xl dancing-script text-black mb-4">You've Got Mail!</h2>
+                    <p class="text-gray-600 mb-6 text-sm sm:text-base">Click the letter to open your surprise!</p>
+                    <button id="openLetter" class="bg-black hover:bg-gray-800 text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-base sm:text-lg transition-all duration-300">
+                        Open Letter ✨
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Letter Content -->
+            <div id="letterContent" class="hidden px-4">
+                <div class="content-reveal bg-white rounded-3xl p-6 sm:p-8 shadow-2xl max-w-2xl mx-auto border border-gray-200">
+                    <div class="text-4xl sm:text-5xl mb-6 heart-float">💖</div>
+                    <h2 class="text-3xl sm:text-4xl dancing-script text-black mb-6">My Dearest Love</h2>
+                    <div class="text-base sm:text-lg text-gray-700 leading-relaxed mb-6 sm:mb-8">
+                        <p class="italic text-center">"Our love doesn't count the miles—it measures the memories we've made."</p>
+                    </div>
+                    <button id="showSurprises" class="bg-black hover:bg-gray-800 text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-base sm:text-lg transition-all duration-300">
+                        Show Me More Surprises! 🎁
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Surprise Activities -->
+            <div id="surpriseActivities" class="hidden px-4">
+                <div class="content-reveal bg-white rounded-3xl p-6 sm:p-8 shadow-2xl max-w-4xl mx-auto border border-gray-200">
+                    <h2 class="text-3xl sm:text-4xl dancing-script text-black mb-6 sm:mb-8">Your Surprise Activities! 🎉</h2>
+                    
+                    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8 max-w-6xl mx-auto">
+                        <div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 sm:p-8 rounded-2xl border border-gray-300 cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl">
+                            <div class="text-4xl sm:text-5xl mb-4 sm:mb-6">🎮</div>
+                            <h3 class="text-xl sm:text-2xl font-semibold text-black mb-3">Game Night</h3>
+                            <p class="text-sm sm:text-base text-gray-600">An evening of fun games, snacks, and quality time together. Get ready for some friendly competition and lots of laughter!</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-gray-200 to-gray-300 p-6 sm:p-8 rounded-2xl border border-gray-400 cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl">
+                            <div class="text-4xl sm:text-5xl mb-4 sm:mb-6">🎬</div>
+                            <h3 class="text-xl sm:text-2xl font-semibold text-black mb-3">Movie Night</h3>
+                            <p class="text-sm sm:text-base text-gray-600">Cozy up for a perfect movie night with your favorite films, popcorn, and cuddles. I've picked some special movies just for us!</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-gray-300 to-gray-400 p-6 sm:p-8 rounded-2xl border border-gray-500 cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl">
+                            <div class="text-4xl sm:text-5xl mb-4 sm:mb-6">🔍</div>
+                            <h3 class="text-xl sm:text-2xl font-semibold text-white mb-3">Escape Room Night</h3>
+                            <p class="text-sm sm:text-base text-gray-100">Put our teamwork to the test with an exciting escape room adventure! We'll solve puzzles and mysteries together.</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-br from-gray-100 to-gray-300 p-6 sm:p-8 rounded-2xl border border-gray-400 cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-xl">
+                            <div class="text-4xl sm:text-5xl mb-4 sm:mb-6">🏛️</div>
+                            <h3 class="text-xl sm:text-2xl font-semibold text-black mb-3">Virtual Museum Tour</h3>
+                            <p class="text-sm sm:text-base text-gray-600">Explore amazing art and history together from the comfort of home. We'll discover fascinating exhibits and share our thoughts!</p>
+                        </div>
+                    </div>
+                    
+                    <button id="showMessage" class="bg-black hover:bg-gray-800 text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-base sm:text-lg transition-all duration-300">
+                        One More Surprise! 💖
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Final Message Section -->
+            <div id="messageSection" class="hidden px-4">
+                <div class="content-reveal max-w-3xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl dancing-script text-black mb-6 sm:mb-8">A Special Message Just for You</h2>
+                    <p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">Click the heart to reveal your personal message!</p>
+                    
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl cursor-pointer transition-all duration-300 hover:shadow-3xl border border-gray-200" id="messageCard">
+                        <div class="text-6xl sm:text-7xl mb-6 heart-float" id="heartIcon">💖</div>
+                        <h3 class="text-2xl sm:text-3xl dancing-script text-black mb-4">Click to Open Your Heart 💕</h3>
+                        <p class="text-gray-500 text-sm sm:text-base">Your special message is waiting...</p>
+                    </div>
+                    
+                    <div id="longMessage" class="hidden mt-6 sm:mt-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-200">
+                        <div class="text-4xl sm:text-5xl mb-6 heart-float">💖</div>
+                        <h3 class="text-3xl sm:text-4xl dancing-script text-black mb-6">My Baby 🖤</h3>
+                        <div class="text-base sm:text-lg text-gray-700 leading-relaxed space-y-4 sm:space-y-5 text-left max-w-2xl mx-auto">
+                            <p>It's only been 102 days, but you've already become such an important part of my life. You're someone I can't imagine my days without. From being my crush, to becoming my manliligaw, and now my girlfriend! How lucky am I?</p>
+                            
+                            <p>The more I get to know you, the deeper I fall. Thank you for your love, your patience, and for simply being you. Thank you for your efforts, and for the time that you keep giving me. Even with the distance, you never failed to make me feel loved and special. I've never imagined being content with simply waiting for someone to come home, but you've changed that.</p>
+                            
+                            <p>You've spent so long being strong, and you try to hide when you're hurt. In times like that, I would like to remind you that you don't have to carry everything alone. You have me to share your burdens with. I'm still trying to learn about love, about us, and about how to become better. I'm glad that I get to grow by your side.</p>
+                            
+                            <p>Here's to more memories, more laughter, more love, and more days with you. Hopefully for a lifetime.</p>
+                            
+                            <p class="text-center font-semibold text-black text-lg sm:text-xl dancing-script pt-4">I love you, always.</p>
+                        </div>
+                        
+                        <div class="mt-8 text-center">
+                            <div class="inline-flex items-center space-x-2 bg-gray-200 px-4 py-2 rounded-full border border-gray-300">
+                                <span class="text-black font-medium">Forever yours,</span>
+                                <span class="text-2xl">🤍</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <audio id="bgMusic" src="bestpart.mp3" autoplay loop hidden></audio>
+    <script>
+        // Animation sequence
+        setTimeout(() => {
+            document.getElementById('letterInteraction').classList.remove('hidden');
+            // Hide the flying envelope emoji
+            document.getElementById('letterDrop').style.display = 'none';
+        }, 6000);
+        
+        // Letter opening
+        document.getElementById('openLetter').addEventListener('click', () => {
+            document.getElementById('letterInteraction').classList.add('hidden');
+            document.getElementById('letterContent').classList.remove('hidden');
+        });
+        
+        // Show surprises
+        document.getElementById('showSurprises').addEventListener('click', () => {
+            document.getElementById('letterContent').classList.add('hidden');
+            document.getElementById('surpriseActivities').classList.remove('hidden');
+        });
+        
+        // Show message
+        document.getElementById('showMessage').addEventListener('click', () => {
+            document.getElementById('surpriseActivities').classList.add('hidden');
+            document.getElementById('messageSection').classList.remove('hidden');
+        });
+        
+        // Message card opening
+        document.getElementById('messageCard').addEventListener('click', function() {
+            this.classList.add('hidden');
+            document.getElementById('longMessage').classList.remove('hidden');
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const music = document.getElementById('bgMusic');
+            music.volume = 0.5; // optional: set volume
+            music.play().catch(e => {
+                // In case autoplay fails due to browser restrictions
+                console.log("Autoplay blocked. Will try again after user interaction.");
+                const tryPlay = () => {
+                    music.play().catch(() => {});
+                    document.body.removeEventListener('click', tryPlay);
+                };
+                document.body.addEventListener('click', tryPlay);
+            });
+        });
+
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'967955a0d79f6e8c',t:'MTc1MzkyNTQ2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
